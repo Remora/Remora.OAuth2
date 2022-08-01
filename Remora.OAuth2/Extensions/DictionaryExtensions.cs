@@ -1,5 +1,5 @@
 //
-//  IAccessTokenRequest.cs
+//  DictionaryExtensions.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -20,31 +20,30 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System;
-using System.Net.Http;
-using JetBrains.Annotations;
+using System.Collections.Generic;
+using Remora.Rest.Core;
 
-namespace Remora.OAuth2.Abstractions;
+namespace Remora.OAuth2.Extensions;
 
 /// <summary>
-/// Represents the common public interface of an access token request.
+/// Defines extension methods for the <see cref="IDictionary{TKey, TValue}"/> interface.
 /// </summary>
-/// <remarks>
-/// This interface is designed to be extended into a specialized access token
-/// request adapted for one of the defined OAuth2 grant methods.
-/// </remarks>
-[PublicAPI]
-public interface IAccessTokenRequest
+internal static class DictionaryExtensions
 {
     /// <summary>
-    /// Gets the requested grant type.
+    /// Adds a value to to collection if it is logically present.
     /// </summary>
-    string GrantType { get; }
+    /// <param name="collection">The collection.</param>
+    /// <param name="name">The name of the value.</param>
+    /// <param name="value">The value.</param>
+    /// <typeparam name="T">The type of the contained value.</typeparam>
+    public static void Add<T>(this IDictionary<string, string> collection, string name, Optional<T> value)
+    {
+        if (!value.HasValue)
+        {
+            return;
+        }
 
-    /// <summary>
-    /// Creates an HTTP request from the information contained in the request object.
-    /// </summary>
-    /// <param name="tokenEndpoint">The token endpoint to use when constructing the request URI.</param>
-    /// <returns>The constructed URI.</returns>
-    HttpRequestMessage ToRequest(Uri tokenEndpoint);
+        collection.Add(name, value.ToString());
+    }
 }

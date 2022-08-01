@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
@@ -43,7 +44,7 @@ public record AuthorizationCodeAuthorizationRequest
 ) : IAuthorizationCodeAuthorizationRequest
 {
     /// <inheritdoc />
-    public Uri ToRequestUri(Uri authorizationEndpoint)
+    public HttpRequestMessage ToRequest(Uri authorizationEndpoint)
     {
         var builder = new UriBuilder(authorizationEndpoint);
 
@@ -63,6 +64,6 @@ public record AuthorizationCodeAuthorizationRequest
         }
 
         builder.Query = queryParameters.ToString();
-        return builder.Uri;
+        return new HttpRequestMessage(HttpMethod.Get, builder.Uri);
     }
 }

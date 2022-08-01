@@ -20,7 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions.OAuthExtensions.ProofKeyCodeExchange;
 
@@ -31,7 +31,7 @@ namespace Remora.OAuth2.OAuth2Extensions.ProofKeyCodeExchange;
 public record ProofKeyCodeExchangeAccessTokenRequest(string CodeVerifier) : IProofKeyCodeExchangeAccessTokenRequest
 {
     /// <inheritdoc />
-    public void AddParameters(NameValueCollection collection)
+    public void AddParameters(IDictionary<string, string> collection)
     {
         collection.Add("code_verifier", this.CodeVerifier);
     }

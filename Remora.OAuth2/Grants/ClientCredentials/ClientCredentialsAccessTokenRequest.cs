@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
@@ -42,25 +43,28 @@ public record ClientCredentialsAccessTokenRequest
 ) : IClientCredentialsAccessTokenRequest
 {
     /// <inheritdoc />
-    public Uri ToRequestUri(Uri tokenEndpoint)
+    public HttpRequestMessage ToRequest(Uri tokenEndpoint)
     {
-        var builder = new UriBuilder(tokenEndpoint);
+        var parameters = new Dictionary<string, string>
+        {
+            { "grant_type", ((IAccessTokenRequest)this).GrantType },
+            { "username", this.Username },
+            { "password", this.Password },
+            { "scope", this.Scope }
+        };
 
-        var queryParameters = HttpUtility.ParseQueryString(tokenEndpoint.Query);
-        queryParameters.Add("grant_type", ((IAccessTokenRequest)this).GrantType);
-        queryParameters.Add("username", this.Username);
-        queryParameters.Add("password", this.Password);
-        queryParameters.Add("scope", this.Scope);
-
+        // ReSharper disable once InvertIf
         if (this.Extensions.IsDefined(out var extensions))
         {
             foreach (var requestExtension in extensions)
             {
-                requestExtension.AddParameters(queryParameters);
+                requestExtension.AddParameters(parameters);
             }
         }
 
-        builder.Query = queryParameters.ToString();
-        return builder.Uri;
+        return new HttpRequestMessage(HttpMethod.Post, tokenEndpoint)
+        {
+            Content = new FormUrlEncodedContent(parameters)
+        };
     }
 }

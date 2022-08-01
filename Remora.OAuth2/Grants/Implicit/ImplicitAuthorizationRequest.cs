@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
@@ -43,26 +44,26 @@ public record ImplicitAuthorizationRequest
 ) : IImplicitAuthorizationRequest
 {
     /// <inheritdoc />
-    public Uri ToRequestUri(Uri authorizationEndpoint)
+    public HttpRequestMessage ToRequest(Uri authorizationEndpoint)
     {
         var builder = new UriBuilder(authorizationEndpoint);
 
-        var queryParameters = HttpUtility.ParseQueryString(authorizationEndpoint.Query);
-        queryParameters.Add("response_type", ((IAuthorizationRequest)this).ResponseType);
-        queryParameters.Add("client_id", this.ClientID);
-        queryParameters.Add("redirect_uri", this.RedirectUri);
-        queryParameters.Add("scope", this.Scope);
-        queryParameters.Add("state", this.State);
+        var parameters = HttpUtility.ParseQueryString(authorizationEndpoint.Query);
+        parameters.Add("response_type", ((IAuthorizationRequest)this).ResponseType);
+        parameters.Add("client_id", this.ClientID);
+        parameters.Add("redirect_uri", this.RedirectUri);
+        parameters.Add("scope", this.Scope);
+        parameters.Add("state", this.State);
 
         if (this.Extensions.IsDefined(out var extensions))
         {
             foreach (var requestExtension in extensions)
             {
-                requestExtension.AddParameters(queryParameters);
+                requestExtension.AddParameters(parameters);
             }
         }
 
-        builder.Query = queryParameters.ToString();
-        return builder.Uri;
+        builder.Query = parameters.ToString();
+        return new HttpRequestMessage(HttpMethod.Get, builder.Uri);
     }
 }

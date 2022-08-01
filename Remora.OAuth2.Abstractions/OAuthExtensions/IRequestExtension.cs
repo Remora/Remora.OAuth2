@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using JetBrains.Annotations;
 
@@ -34,11 +35,6 @@ namespace Remora.OAuth2.Abstractions.OAuthExtensions;
 [PublicAPI]
 public interface IRequestExtension
 {
-    /// <summary>
-    /// Adds the record's parameters to the given collection.
-    /// </summary>
-    /// <param name="collection">The collection.</param>
-    void AddParameters(NameValueCollection collection);
 }
 
 /// <summary>
@@ -47,6 +43,11 @@ public interface IRequestExtension
 [PublicAPI]
 public interface IAuthorizationRequestExtension : IRequestExtension
 {
+    /// <summary>
+    /// Adds the record's parameters to the given collection.
+    /// </summary>
+    /// <param name="collection">The collection.</param>
+    void AddParameters(NameValueCollection collection);
 }
 
 /// <summary>
@@ -55,4 +56,9 @@ public interface IAuthorizationRequestExtension : IRequestExtension
 [PublicAPI]
 public interface IAccessTokenRequestExtension : IRequestExtension
 {
+    /// <summary>
+    /// Adds the record's parameters to the given collection.
+    /// </summary>
+    /// <param name="collection">The collection.</param>
+    void AddParameters(IDictionary<string, string> collection);
 }
