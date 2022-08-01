@@ -23,7 +23,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
 using Remora.OAuth2.Abstractions.OAuthExtensions;
@@ -38,7 +37,7 @@ public record ResourceOwnerPasswordCredentialsAccessTokenRequest
 (
     string Username,
     string Password,
-    Optional<string> Scope = default,
+    Optional<IReadOnlyList<string>> Scope = default,
     Optional<IReadOnlyList<IAccessTokenRequestExtension>> Extensions = default
 ) : IResourceOwnerPasswordCredentialsAccessTokenRequest
 {

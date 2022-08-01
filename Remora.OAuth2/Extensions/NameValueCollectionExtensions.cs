@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using Remora.Rest.Core;
 
@@ -31,7 +32,7 @@ namespace Remora.OAuth2.Extensions;
 internal static class NameValueCollectionExtensions
 {
     /// <summary>
-    /// Adds a value to to collection if it is logically present.
+    /// Adds a value to the collection if it is logically present.
     /// </summary>
     /// <param name="collection">The collection.</param>
     /// <param name="name">The name of the value.</param>
@@ -45,5 +46,21 @@ internal static class NameValueCollectionExtensions
         }
 
         collection.Add(name, value.ToString());
+    }
+
+    /// <summary>
+    /// Adds a set of strings as a single space-delimited string to the collection if it is logically present.
+    /// </summary>
+    /// <param name="collection">The collection.</param>
+    /// <param name="name">The name of the value.</param>
+    /// <param name="value">The value.</param>
+    public static void Add(this NameValueCollection collection, string name, Optional<IReadOnlyList<string>> value)
+    {
+        if (!value.HasValue)
+        {
+            return;
+        }
+
+        collection.Add(name, string.Join(' ', value.ToString()));
     }
 }

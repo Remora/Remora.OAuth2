@@ -31,7 +31,7 @@ namespace Remora.OAuth2.Extensions;
 internal static class DictionaryExtensions
 {
     /// <summary>
-    /// Adds a value to to collection if it is logically present.
+    /// Adds a value to the collection if it is logically present.
     /// </summary>
     /// <param name="collection">The collection.</param>
     /// <param name="name">The name of the value.</param>
@@ -45,5 +45,21 @@ internal static class DictionaryExtensions
         }
 
         collection.Add(name, value.ToString());
+    }
+
+    /// <summary>
+    /// Adds a set of strings as a single space-delimited string to the collection if it is logically present.
+    /// </summary>
+    /// <param name="collection">The collection.</param>
+    /// <param name="name">The name of the value.</param>
+    /// <param name="value">The value.</param>
+    public static void Add(this IDictionary<string, string> collection, string name, Optional<IReadOnlyList<string>> value)
+    {
+        if (!value.HasValue)
+        {
+            return;
+        }
+
+        collection.Add(name, string.Join(' ', value.ToString()));
     }
 }

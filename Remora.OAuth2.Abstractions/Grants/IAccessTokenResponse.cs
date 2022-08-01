@@ -21,6 +21,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using Remora.Rest.Core;
 
@@ -55,5 +56,5 @@ public interface IAccessTokenResponse
     /// Gets the scope the token encompasses. This value may be omitted if it is
     /// identical to the client's original request.
     /// </summary>
-    Optional<string> Scope { get; }
+    Optional<IReadOnlyList<string>> Scope { get; }
 }

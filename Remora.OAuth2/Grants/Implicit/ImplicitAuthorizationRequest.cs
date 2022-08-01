@@ -38,7 +38,7 @@ public record ImplicitAuthorizationRequest
 (
     string ClientID,
     Optional<Uri> RedirectUri = default,
-    Optional<string> Scope = default,
+    Optional<IReadOnlyList<string>> Scope = default,
     Optional<string> State = default,
     Optional<IReadOnlyList<IAuthorizationRequestExtension>> Extensions = default
 ) : IImplicitAuthorizationRequest

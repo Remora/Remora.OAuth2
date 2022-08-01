@@ -21,6 +21,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using JetBrains.Annotations;
 using Remora.Rest.Core;
@@ -57,7 +58,7 @@ public interface IAuthorizationRequest
     /// <summary>
     /// Gets the requested scope of the access token.
     /// </summary>
-    Optional<string> Scope { get; }
+    Optional<IReadOnlyList<string>> Scope { get; }
 
     /// <summary>
     /// Gets an opaque value used to maintain state between the request and

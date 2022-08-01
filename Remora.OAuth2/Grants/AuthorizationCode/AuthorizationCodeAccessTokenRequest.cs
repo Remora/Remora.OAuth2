@@ -23,7 +23,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
 using Remora.OAuth2.Abstractions.OAuthExtensions;

@@ -21,6 +21,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
 using Remora.Rest.Core;
@@ -34,6 +35,6 @@ public record ResourceOwnerPasswordCredentialsAccessTokenResponse
     string AccessToken,
     string TokenType,
     Optional<TimeSpan> ExpiresIn = default,
-    Optional<string> Scope = default,
+    Optional<IReadOnlyList<string>> Scope = default,
     Optional<string> RefreshToken = default
 ) : IResourceOwnerPasswordCredentialsAccessTokenResponse;
