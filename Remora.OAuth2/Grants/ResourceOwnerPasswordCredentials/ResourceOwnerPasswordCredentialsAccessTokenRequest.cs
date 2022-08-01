@@ -43,7 +43,7 @@ public record ResourceOwnerPasswordCredentialsAccessTokenRequest
     {
         var builder = new UriBuilder(tokenEndpoint);
 
-        var queryParameters = HttpUtility.ParseQueryString(string.Empty);
+        var queryParameters = HttpUtility.ParseQueryString(tokenEndpoint.Query);
         queryParameters.Add("grant_type", ((IAccessTokenRequest)this).GrantType);
         queryParameters.Add("username", this.Username);
         queryParameters.Add("password", this.Password);

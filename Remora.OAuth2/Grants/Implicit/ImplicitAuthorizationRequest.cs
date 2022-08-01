@@ -44,7 +44,7 @@ public record ImplicitAuthorizationRequest
     {
         var builder = new UriBuilder(authorizationEndpoint);
 
-        var queryParameters = HttpUtility.ParseQueryString(string.Empty);
+        var queryParameters = HttpUtility.ParseQueryString(authorizationEndpoint.Query);
         queryParameters.Add("response_type", ((IAuthorizationRequest)this).ResponseType);
         queryParameters.Add("client_id", this.ClientID);
         queryParameters.Add("redirect_uri", this.RedirectUri);
