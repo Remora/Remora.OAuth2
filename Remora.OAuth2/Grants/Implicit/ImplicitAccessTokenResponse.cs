@@ -1,5 +1,5 @@
 //
-//  IAuthorizationCodeAccessTokenRequest.cs
+//  ImplicitAccessTokenResponse.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -22,32 +22,18 @@
 
 using System;
 using JetBrains.Annotations;
+using Remora.OAuth2.Abstractions;
 using Remora.Rest.Core;
 
-namespace Remora.OAuth2.Abstractions;
+namespace Remora.OAuth2;
 
-/// <summary>
-/// Represents the public interface of an authorization code-based access token
-/// request.
-/// </summary>
+/// <inheritdoc />
 [PublicAPI]
-public interface IAuthorizationCodeAccessTokenRequest : IAccessTokenRequest
-{
-    /// <inheritdoc/>
-    string IAccessTokenRequest.GrantType => "authorization_code";
-
-    /// <summary>
-    /// Gets the authorization code received from the authorization server.
-    /// </summary>
-    string Code { get; }
-
-    /// <summary>
-    /// Gets the request URI used in the original authorization request.
-    /// </summary>
-    Optional<Uri> RedirectUri { get; }
-
-    /// <summary>
-    /// Gets the identifier of the client making the request.
-    /// </summary>
-    Optional<string> ClientID { get; }
-}
+public record ImplicitAccessTokenResponse
+(
+    string AccessToken,
+    string TokenType,
+    Optional<TimeSpan> ExpiresIn = default,
+    Optional<string> Scope = default,
+    Optional<string> State = default
+) : IImplicitAccessTokenResponse;

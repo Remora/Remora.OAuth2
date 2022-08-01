@@ -63,4 +63,11 @@ public interface IAuthorizationRequest
     /// callback.
     /// </summary>
     Optional<string> State { get; }
+
+    /// <summary>
+    /// Creates a request URI from the information contained in the request object.
+    /// </summary>
+    /// <param name="authorizationEndpoint">The authorization endpoint to use when constructing the request URI.</param>
+    /// <returns>The constructed URI.</returns>
+    Uri ToRequestUri(Uri authorizationEndpoint);
 }

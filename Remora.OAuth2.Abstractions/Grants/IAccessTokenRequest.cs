@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+using System;
 using JetBrains.Annotations;
 
 namespace Remora.OAuth2.Abstractions;
@@ -38,4 +39,11 @@ public interface IAccessTokenRequest
     /// Gets the requested grant type.
     /// </summary>
     string GrantType { get; }
+
+    /// <summary>
+    /// Creates a request URI from the information contained in the request object.
+    /// </summary>
+    /// <param name="tokenEndpoint">The token endpoint to use when constructing the request URI.</param>
+    /// <returns>The constructed URI.</returns>
+    Uri ToRequestUri(Uri tokenEndpoint);
 }

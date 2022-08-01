@@ -1,5 +1,5 @@
 //
-//  IAuthorizationCodeAccessTokenRequest.cs
+//  NameValueCollectionExtensions.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -20,34 +20,30 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System;
-using JetBrains.Annotations;
+using System.Collections.Specialized;
 using Remora.Rest.Core;
 
-namespace Remora.OAuth2.Abstractions;
+namespace Remora.OAuth2.Extensions;
 
 /// <summary>
-/// Represents the public interface of an authorization code-based access token
-/// request.
+/// Defines extension methods for the <see cref="NameValueCollection"/> class.
 /// </summary>
-[PublicAPI]
-public interface IAuthorizationCodeAccessTokenRequest : IAccessTokenRequest
+internal static class NameValueCollectionExtensions
 {
-    /// <inheritdoc/>
-    string IAccessTokenRequest.GrantType => "authorization_code";
-
     /// <summary>
-    /// Gets the authorization code received from the authorization server.
+    /// Adds a value to to collection if it is logically present.
     /// </summary>
-    string Code { get; }
+    /// <param name="collection">The collection.</param>
+    /// <param name="name">The name of the value.</param>
+    /// <param name="value">The value.</param>
+    /// <typeparam name="T">The type of the contained value.</typeparam>
+    public static void Add<T>(this NameValueCollection collection, string name, Optional<T> value)
+    {
+        if (!value.HasValue)
+        {
+            return;
+        }
 
-    /// <summary>
-    /// Gets the request URI used in the original authorization request.
-    /// </summary>
-    Optional<Uri> RedirectUri { get; }
-
-    /// <summary>
-    /// Gets the identifier of the client making the request.
-    /// </summary>
-    Optional<string> ClientID { get; }
+        collection.Add(name, value.ToString());
+    }
 }

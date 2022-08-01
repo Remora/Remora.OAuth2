@@ -1,5 +1,5 @@
 //
-//  IAuthorizationCodeAccessTokenRequest.cs
+//  ClientCredentialsAccessTokenRequest.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -21,33 +21,35 @@
 //
 
 using System;
+using System.Web;
 using JetBrains.Annotations;
+using Remora.OAuth2.Abstractions;
+using Remora.OAuth2.Extensions;
 using Remora.Rest.Core;
 
-namespace Remora.OAuth2.Abstractions;
+namespace Remora.OAuth2;
 
-/// <summary>
-/// Represents the public interface of an authorization code-based access token
-/// request.
-/// </summary>
+/// <inheritdoc />
 [PublicAPI]
-public interface IAuthorizationCodeAccessTokenRequest : IAccessTokenRequest
+public record ClientCredentialsAccessTokenRequest
+(
+    string Username,
+    string Password,
+    Optional<string> Scope
+) : IClientCredentialsAccessTokenRequest
 {
-    /// <inheritdoc/>
-    string IAccessTokenRequest.GrantType => "authorization_code";
+    /// <inheritdoc />
+    public Uri ToRequestUri(Uri tokenEndpoint)
+    {
+        var builder = new UriBuilder(tokenEndpoint);
 
-    /// <summary>
-    /// Gets the authorization code received from the authorization server.
-    /// </summary>
-    string Code { get; }
+        var queryParameters = HttpUtility.ParseQueryString(string.Empty);
+        queryParameters.Add("grant_type", ((IAccessTokenRequest)this).GrantType);
+        queryParameters.Add("username", this.Username);
+        queryParameters.Add("password", this.Password);
+        queryParameters.Add("scope", this.Scope);
 
-    /// <summary>
-    /// Gets the request URI used in the original authorization request.
-    /// </summary>
-    Optional<Uri> RedirectUri { get; }
-
-    /// <summary>
-    /// Gets the identifier of the client making the request.
-    /// </summary>
-    Optional<string> ClientID { get; }
+        builder.Query = queryParameters.ToString();
+        return builder.Uri;
+    }
 }
