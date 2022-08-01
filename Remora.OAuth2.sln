@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remora.OAuth2", "Remora.OAuth2\Remora.OAuth2.csproj", "{36B8CDA3-43E5-4C81-9DF5-BA076CAAA82F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D1EE58E5-0BDC-42CC-8697-D95EC05C0088}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\Directory.Build.props = Tests\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remora.OAuth.Tests", "Tests\Remora.OAuth.Tests\Remora.OAuth.Tests.csproj", "{43E6A2DC-8C15-4558-A784-EAC226663353}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remora.OAuth2.Abstractions", "Remora.OAuth2.Abstractions\Remora.OAuth2.Abstractions.csproj", "{959D9CBC-F5B2-4E22-8C42-8538222CD6F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "metadata", "metadata", "{3E5534A1-FF36-43EE-AEA9-F7A25C6A48FB}"
+	ProjectSection(SolutionItems) = preProject
+		stylecop.json = stylecop.json
+		stylecop.ruleset = stylecop.ruleset
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{D7E69F6B-49D5-4412-83E5-CA7913154058}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{5C9D518E-D1DA-4B74-91BF-27E44A34988B}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36B8CDA3-43E5-4C81-9DF5-BA076CAAA82F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B8CDA3-43E5-4C81-9DF5-BA076CAAA82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B8CDA3-43E5-4C81-9DF5-BA076CAAA82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B8CDA3-43E5-4C81-9DF5-BA076CAAA82F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43E6A2DC-8C15-4558-A784-EAC226663353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E6A2DC-8C15-4558-A784-EAC226663353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E6A2DC-8C15-4558-A784-EAC226663353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E6A2DC-8C15-4558-A784-EAC226663353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{959D9CBC-F5B2-4E22-8C42-8538222CD6F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{959D9CBC-F5B2-4E22-8C42-8538222CD6F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{959D9CBC-F5B2-4E22-8C42-8538222CD6F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{959D9CBC-F5B2-4E22-8C42-8538222CD6F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{43E6A2DC-8C15-4558-A784-EAC226663353} = {D1EE58E5-0BDC-42CC-8697-D95EC05C0088}
+		{D7E69F6B-49D5-4412-83E5-CA7913154058} = {3E5534A1-FF36-43EE-AEA9-F7A25C6A48FB}
+		{5C9D518E-D1DA-4B74-91BF-27E44A34988B} = {D7E69F6B-49D5-4412-83E5-CA7913154058}
+	EndGlobalSection
+EndGlobal

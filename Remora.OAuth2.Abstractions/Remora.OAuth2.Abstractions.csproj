@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <VersionPrefix>1.0.0-alpha</VersionPrefix>
+        <Description>Remora.OAuth2's implementation of OAuth2's API objects</Description>
+        <PackageReleaseNotes>
+            Initial release.
+        </PackageReleaseNotes>
+    </PropertyGroup>
+
+</Project>

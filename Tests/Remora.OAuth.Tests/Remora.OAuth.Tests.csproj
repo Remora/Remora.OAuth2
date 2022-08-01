@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Remora.OAuth2\Remora.OAuth2.csproj" />
+    </ItemGroup>
+
+</Project>
