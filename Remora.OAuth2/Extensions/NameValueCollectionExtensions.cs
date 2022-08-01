@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using Remora.Rest.Core;
@@ -38,14 +39,14 @@ internal static class NameValueCollectionExtensions
     /// <param name="name">The name of the value.</param>
     /// <param name="value">The value.</param>
     /// <typeparam name="T">The type of the contained value.</typeparam>
-    public static void Add<T>(this NameValueCollection collection, string name, Optional<T> value)
+    public static void Add<T>(this NameValueCollection collection, string name, Optional<T> value) where T : notnull
     {
         if (!value.HasValue)
         {
             return;
         }
 
-        collection.Add(name, value.ToString());
+        collection.Add(name, value.Value.ToString() ?? throw new InvalidOperationException());
     }
 
     /// <summary>
@@ -61,6 +62,6 @@ internal static class NameValueCollectionExtensions
             return;
         }
 
-        collection.Add(name, string.Join(' ', value.ToString()));
+        collection.Add(name, string.Join(' ', value.Value));
     }
 }
