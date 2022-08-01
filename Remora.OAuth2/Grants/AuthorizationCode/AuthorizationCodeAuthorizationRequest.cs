@@ -21,9 +21,11 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
+using Remora.OAuth2.Abstractions.OAuthExtensions;
 using Remora.OAuth2.Extensions;
 using Remora.Rest.Core;
 
@@ -36,7 +38,8 @@ public record AuthorizationCodeAuthorizationRequest
     string ClientID,
     Optional<Uri> RedirectUri = default,
     Optional<string> Scope = default,
-    Optional<string> State = default
+    Optional<string> State = default,
+    Optional<IReadOnlyList<IAuthorizationRequestExtension>> Extensions = default
 ) : IAuthorizationCodeAuthorizationRequest
 {
     /// <inheritdoc />
@@ -50,6 +53,14 @@ public record AuthorizationCodeAuthorizationRequest
         queryParameters.Add("redirect_uri", this.RedirectUri);
         queryParameters.Add("scope", this.Scope);
         queryParameters.Add("state", this.State);
+
+        if (this.Extensions.IsDefined(out var extensions))
+        {
+            foreach (var requestExtension in extensions)
+            {
+                requestExtension.AddParameters(queryParameters);
+            }
+        }
 
         builder.Query = queryParameters.ToString();
         return builder.Uri;

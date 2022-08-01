@@ -21,9 +21,11 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
+using Remora.OAuth2.Abstractions.OAuthExtensions;
 using Remora.OAuth2.Extensions;
 using Remora.Rest.Core;
 
@@ -35,7 +37,8 @@ public record ClientCredentialsAccessTokenRequest
 (
     string Username,
     string Password,
-    Optional<string> Scope = default
+    Optional<string> Scope = default,
+    Optional<IReadOnlyList<IAccessTokenRequestExtension>> Extensions = default
 ) : IClientCredentialsAccessTokenRequest
 {
     /// <inheritdoc />
@@ -48,6 +51,14 @@ public record ClientCredentialsAccessTokenRequest
         queryParameters.Add("username", this.Username);
         queryParameters.Add("password", this.Password);
         queryParameters.Add("scope", this.Scope);
+
+        if (this.Extensions.IsDefined(out var extensions))
+        {
+            foreach (var requestExtension in extensions)
+            {
+                requestExtension.AddParameters(queryParameters);
+            }
+        }
 
         builder.Query = queryParameters.ToString();
         return builder.Uri;
