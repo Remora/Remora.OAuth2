@@ -35,7 +35,7 @@ public record ResourceOwnerPasswordCredentialsAccessTokenRequest
 (
     string Username,
     string Password,
-    Optional<string> Scope
+    Optional<string> Scope = default
 ) : IResourceOwnerPasswordCredentialsAccessTokenRequest
 {
     /// <inheritdoc />

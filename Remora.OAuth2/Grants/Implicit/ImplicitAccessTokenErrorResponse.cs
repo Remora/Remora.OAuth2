@@ -32,7 +32,7 @@ namespace Remora.OAuth2;
 public record ImplicitAccessTokenErrorResponse
 (
     string Error,
-    Optional<string> ErrorDescription,
-    Optional<Uri> ErrorUri,
-    Optional<string> State
+    Optional<string> ErrorDescription = default,
+    Optional<Uri> ErrorUri = default,
+    Optional<string> State = default
 ) : IImplicitAccessTokenErrorResponse;

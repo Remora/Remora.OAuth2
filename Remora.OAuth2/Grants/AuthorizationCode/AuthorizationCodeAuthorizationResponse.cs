@@ -28,5 +28,5 @@ namespace Remora.OAuth2;
 
 /// <inheritdoc />
 [PublicAPI]
-public record AuthorizationCodeAuthorizationResponse(string Code, Optional<string> State)
+public record AuthorizationCodeAuthorizationResponse(string Code, Optional<string> State = default)
     : IAuthorizationCodeAuthorizationResponse;
