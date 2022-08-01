@@ -11,6 +11,7 @@ Want to chat with users and developers? Come join us!
 
 # Table of Contents
 1. [Features](#1-features)
+   1. [Support Table](#11-support-table)
 2. [Goals](#2-goals)
     1. [Correctness](#21-correctness)
     2. [Robustness](#22-robustness)
@@ -24,6 +25,16 @@ Want to chat with users and developers? Come join us!
   * Modern and active - uses contemporary technologies and usage patterns
   * Fully asynchronous - do many things at once at scale
   * Modular - swap parts of the library with your own implementations at will
+
+### 1.1 Support Table
+This table lists the various RFCs related to OAuth2 that the library supports.
+
+| RFC  | Name                              | Supported      |
+|------|-----------------------------------|----------------|
+| 6749 | OAuth 2.0 Authorization Framework | API model only |
+| 7009 | Token Revocation                  | API model only |
+| 8628 | Device Authorization Grant        | API model only |
+
 
 ## 2. Goals
 Remora.OAuth2 defines the following three goals that guides its development. 
