@@ -44,7 +44,7 @@ public record TokenRevocationRequest
     {
         var parameters = new Dictionary<string, string>
         {
-            { "toke", this.Token },
+            { "token", this.Token },
             { "token_type_hint", this.TokenTypeHint },
         };
 
