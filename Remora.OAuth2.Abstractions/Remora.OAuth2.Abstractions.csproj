@@ -8,4 +8,8 @@
         </PackageReleaseNotes>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Remora.Rest.Core" Version="2.0.2" />
+    </ItemGroup>
+
 </Project>
