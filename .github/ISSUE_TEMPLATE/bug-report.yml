@@ -6,7 +6,7 @@ labels: ["bug"]
 body:
   - type: markdown
     attributes:
-      value: "Before opening a new issue, please search existing issues:  https://github.com/Nihlus/Remora.Discord/issues"
+      value: "Before opening a new issue, please search existing issues:  https://github.com/Nihlus/Remora.OAuth2/issues"
   - type: textarea
     id: description
     attributes:
