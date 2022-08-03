@@ -21,12 +21,14 @@
 //
 
 using System;
+using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
 using Remora.Rest.Core;
 
 namespace Remora.OAuth2;
 
 /// <inheritdoc />
+[PublicAPI]
 public record AuthorizationCodeAuthorizationErrorResponse
 (
     string Error,
