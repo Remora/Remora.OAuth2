@@ -35,6 +35,5 @@ public record ClientCredentialsAccessTokenResponse
     string AccessToken,
     string TokenType,
     Optional<TimeSpan> ExpiresIn = default,
-    Optional<IReadOnlyList<string>> Scope = default,
-    Optional<string> RefreshToken = default
+    Optional<IReadOnlyList<string>> Scope = default
 ) : IClientCredentialsAccessTokenResponse;

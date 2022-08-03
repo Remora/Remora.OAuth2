@@ -35,8 +35,6 @@ namespace Remora.OAuth2;
 [PublicAPI]
 public record ClientCredentialsAccessTokenRequest
 (
-    string Username,
-    string Password,
     Optional<IReadOnlyList<string>> Scope = default,
     Optional<IReadOnlyList<IAccessTokenRequestExtension>> Extensions = default
 ) : IClientCredentialsAccessTokenRequest
@@ -47,8 +45,6 @@ public record ClientCredentialsAccessTokenRequest
         var parameters = new Dictionary<string, string>
         {
             { "grant_type", ((IAccessTokenRequest)this).GrantType },
-            { "username", this.Username },
-            { "password", this.Password },
             { "scope", this.Scope }
         };
 
