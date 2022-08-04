@@ -20,12 +20,15 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+using JetBrains.Annotations;
+
 namespace Remora.OAuth2.Abstractions;
 
 /// <summary>
 /// Represents the public interface of a client credentials-based access token
 /// response.
 /// </summary>
+[PublicAPI]
 public interface IClientCredentialsAccessTokenResponse : IAccessTokenResponse
 {
 }
