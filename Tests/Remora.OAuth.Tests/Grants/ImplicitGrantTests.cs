@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Web;
 using Remora.OAuth.Tests.TestBases;
 using Remora.OAuth2;
 using Remora.OAuth2.Abstractions.OAuthExtensions;
@@ -152,6 +153,170 @@ public static class ImplicitGrantTests
                     },
                     true
                 );
+            }
+        }
+    }
+
+    /// <summary>
+    /// Tests the <see cref="ImplicitAccessTokenErrorResponse"/> class.
+    /// </summary>
+    public static class ImplicitAccessTokenErrorResponseTests
+    {
+        /// <summary>
+        /// Tests the <see cref="ImplicitAccessTokenErrorResponse.TryParse"/> method.
+        /// </summary>
+        public static class TryParse
+        {
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseErrorCorrectly()
+            {
+                var expected = "some error";
+
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + $"error={HttpUtility.UrlEncode(expected)}&"
+                    + "error_description=ooga&"
+                    + $"error_uri={HttpUtility.UrlEncode("https://somewhere.org")}&"
+                    + "state=booga"
+                );
+
+                Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.Error);
+            }
+
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseErrorDescriptionCorrectly()
+            {
+                var expected = "some description";
+
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "error=ooga&"
+                    + $"error_description={HttpUtility.UrlEncode(expected)}&"
+                    + $"error_uri={HttpUtility.UrlEncode("https://somewhere.org")}&"
+                    + "state=booga"
+                );
+
+                Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.ErrorDescription);
+            }
+
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseErrorUriCorrectly()
+            {
+                var expected = "https://some-error-uri.com";
+
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "error=ooga&"
+                    + "error_description=booga&"
+                    + $"error_uri={HttpUtility.UrlEncode(expected)}&"
+                    + "state=wooga"
+                );
+
+                Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
+                Assert.Equal(new Uri(expected), response.ErrorUri);
+            }
+
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseStateCorrectly()
+            {
+                var expected = "some state";
+
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "error=ooga&"
+                    + "error_description=booga&"
+                    + "error_uri=wooga&"
+                    + $"state={HttpUtility.UrlEncode(expected)}"
+                );
+
+                Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.State);
+            }
+
+            /// <summary>
+            /// Tests whether the method requires a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void RequiresError()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "error_description=ooga&"
+                    + "error_uri=booga&"
+                    + "state=wooga"
+                );
+
+                Assert.False(ImplicitAccessTokenErrorResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method does not require a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void DoesNotRequireErrorDescription()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "error=ooga&"
+                    + "error_uri=wooga&"
+                    + "state=wooga"
+                );
+
+                Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method does not require a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void DoesNotRequireErrorUri()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "error=ooga&"
+                    + "error_description=booga&"
+                    + "state=wooga"
+                );
+
+                Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method does not require a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void DoesNotRequireState()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "error=ooga&"
+                    + "error_description=booga&"
+                    + "error_uri=wooga"
+                );
+
+                Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out _));
             }
         }
     }
