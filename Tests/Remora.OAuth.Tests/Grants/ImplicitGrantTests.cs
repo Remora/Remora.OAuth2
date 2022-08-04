@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using Remora.OAuth.Tests.TestBases;
 using Remora.OAuth2;
@@ -317,6 +318,248 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out _));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Tests the <see cref="ImplicitAccessTokenResponse"/> class.
+    /// </summary>
+    public static class ImplicitAccessTokenResponseTests
+    {
+        /// <summary>
+        /// Tests the <see cref="ImplicitAccessTokenResponse.TryParse"/> method.
+        /// </summary>
+        public static class TryParse
+        {
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseAccessTokenCorrectly()
+            {
+                var expected = "some token";
+
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + $"access_token={HttpUtility.UrlEncode(expected)}&"
+                    + "token_type=ooga&"
+                    + "expires_in=3600&"
+                    + "scope=wooga&"
+                    + "state=booga"
+                );
+
+                Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.AccessToken);
+            }
+
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseTokenTypeCorrectly()
+            {
+                var expected = "some token type";
+
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + $"access_token=ooga&"
+                    + $"token_type={HttpUtility.UrlEncode(expected)}&"
+                    + "expires_in=3600&"
+                    + "scope=wooga&"
+                    + "state=booga"
+                );
+
+                Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.TokenType);
+            }
+
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseExpiresInCorrectly()
+            {
+                var expected = TimeSpan.FromSeconds(3600);
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + $"access_token=ooga&"
+                    + $"token_type=mooga&"
+                    + $"expires_in={expected.TotalSeconds:0}&"
+                    + "scope=wooga&"
+                    + "state=booga"
+                );
+
+                Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.ExpiresIn);
+            }
+
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseScopeCorrectly()
+            {
+                var expected = "some valid scope";
+
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + $"access_token=wooga&"
+                    + "token_type=ooga&"
+                    + "expires_in=3600&"
+                    + $"scope={HttpUtility.UrlEncode(expected)}&"
+                    + "state=booga"
+                );
+
+                Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
+                Assert.Equal(expected.Split(' ').AsEnumerable(), response.Scope.Value.AsEnumerable());
+            }
+
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseStateCorrectly()
+            {
+                var expected = "some state";
+
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + $"access_token=wooga&"
+                    + "token_type=ooga&"
+                    + "expires_in=3600&"
+                    + $"scope=booga&"
+                    + $"state={HttpUtility.UrlEncode(expected)}"
+                );
+
+                Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.State);
+            }
+
+            /// <summary>
+            /// Tests whether the method requires a fragment to be present.
+            /// </summary>
+            [Fact]
+            public static void RequiresFragment()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net"
+                );
+
+                Assert.False(ImplicitAccessTokenResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method requires a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void RequiresAccessToken()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "token_type=ooga&"
+                    + "expires_in=3600&"
+                    + "scope=booga&"
+                    + "state=wooga"
+                );
+
+                Assert.False(ImplicitAccessTokenResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method requires a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void RequiresTokenType()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "access_token=ooga&"
+                    + "expires_in=3600&"
+                    + "scope=booga&"
+                    + "state=wooga"
+                );
+
+                Assert.False(ImplicitAccessTokenResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method does not require a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void DoesNotRequireExpiresIn()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "access_token=ooga&"
+                    + "token_type=booga&"
+                    + "scope=booga&"
+                    + "state=wooga"
+                );
+
+                Assert.True(ImplicitAccessTokenResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method requires a certain property to be in a certain format.
+            /// </summary>
+            [Fact]
+            public static void RequiresNumericalExpiresIn()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "access_token=ooga&"
+                    + "token_type=booga&"
+                    + "expires_in=notanumber&"
+                    + "scope=booga&"
+                    + "state=wooga"
+                );
+
+                Assert.False(ImplicitAccessTokenResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method does not require a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void DoesNotRequireScope()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "access_token=ooga&"
+                    + "token_type=booga&"
+                    + "state=wooga"
+                );
+
+                Assert.True(ImplicitAccessTokenResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method does not require a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void DoesNotRequireState()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "access_token=ooga&"
+                    + "token_type=booga&"
+                    + "scope=wooga"
+                );
+
+                Assert.True(ImplicitAccessTokenResponse.TryParse(value, out _));
             }
         }
     }

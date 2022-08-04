@@ -22,8 +22,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
+using Remora.OAuth2.Extensions;
 using Remora.Rest.Core;
 
 namespace Remora.OAuth2;
@@ -37,4 +41,54 @@ public record ImplicitAccessTokenResponse
     Optional<TimeSpan> ExpiresIn = default,
     Optional<IReadOnlyList<string>> Scope = default,
     Optional<string> State = default
-) : IImplicitAccessTokenResponse;
+) : IImplicitAccessTokenResponse
+{
+    /// <summary>
+    /// Attempts to parse an access token response from the given URI, visited by the user agent.
+    /// </summary>
+    /// <param name="location">The visited URI.</param>
+    /// <param name="response">The parsed response.</param>
+    /// <returns>true if a valid response was parsed; otherwise, false.</returns>
+    public static bool TryParse(Uri location, [NotNullWhen(true)] out IImplicitAccessTokenResponse? response)
+    {
+        response = null;
+
+        if (string.IsNullOrEmpty(location.Fragment))
+        {
+            return false;
+        }
+
+        var properties = HttpUtility.ParseQueryString(location.Fragment[1..]).ToDictionary();
+        if (!properties.TryGetValue("access_token", out var accessToken))
+        {
+            return false;
+        }
+
+        if (!properties.TryGetValue("token_type", out var tokenType))
+        {
+            return false;
+        }
+
+        Optional<TimeSpan> expiresIn = default;
+        if (properties.TryGetValue("expires_in", out var rawExpiresIn))
+        {
+            if (!double.TryParse(rawExpiresIn, out var expiresInSeconds))
+            {
+                return false;
+            }
+
+            expiresIn = TimeSpan.FromSeconds(expiresInSeconds);
+        }
+
+        Optional<IReadOnlyList<string>> scope = default;
+        if (properties.TryGetValue("scope", out var rawScope))
+        {
+            scope = rawScope.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+        }
+
+        _ = properties.TryGetValue("state", out Optional<string> state);
+
+        response = new ImplicitAccessTokenResponse(accessToken, tokenType, expiresIn, scope, state);
+        return true;
+    }
+}
