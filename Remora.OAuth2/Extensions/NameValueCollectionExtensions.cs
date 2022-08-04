@@ -74,7 +74,7 @@ internal static class NameValueCollectionExtensions
     /// <exception cref="InvalidOperationException">Thrown if any encountered key is null.</exception>
     public static IReadOnlyDictionary<string, string> ToDictionary(this NameValueCollection collection)
     {
-        return collection.AllKeys.ToDictionary
+        return collection.AllKeys.Where(k => k is not null).ToDictionary
         (
             k => k ?? throw new InvalidOperationException(),
             k => collection[k] ?? string.Empty
