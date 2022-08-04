@@ -50,6 +50,11 @@ public record ImplicitAccessTokenErrorResponse
     {
         response = null;
 
+        if (string.IsNullOrEmpty(location.Fragment))
+        {
+            return false;
+        }
+
         var properties = HttpUtility.ParseQueryString(location.Fragment[1..]).ToDictionary();
         if (!properties.TryGetValue("error", out var error))
         {
