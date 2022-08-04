@@ -21,8 +21,11 @@
 //
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
+using Remora.OAuth2.Extensions;
 using Remora.Rest.Core;
 
 namespace Remora.OAuth2;
@@ -35,4 +38,41 @@ public record AuthorizationCodeAuthorizationErrorResponse
     Optional<string> ErrorDescription = default,
     Optional<Uri> ErrorUri = default,
     Optional<string> State = default
-) : IAuthorizationCodeAuthorizationErrorResponse;
+) : IAuthorizationCodeAuthorizationErrorResponse
+{
+    /// <summary>
+    /// Attempts to parse an authorization error response from the given URI, visited by the user agent.
+    /// </summary>
+    /// <param name="location">The visited URI.</param>
+    /// <param name="response">The parsed response.</param>
+    /// <returns>true if a valid response was parsed; otherwise, false.</returns>
+    public static bool TryParse(Uri location, [NotNullWhen(true)] out IAuthorizationCodeAuthorizationErrorResponse? response)
+    {
+        response = null;
+
+        var properties = HttpUtility.ParseQueryString(location.Query).ToDictionary();
+        if (!properties.TryGetValue("error", out var error))
+        {
+            return false;
+        }
+
+        _ = properties.TryGetValue("error_description", out Optional<string> errorDescription);
+        _ = properties.TryGetValue("error_uri", out Optional<string> rawErrorUri);
+
+        Optional<Uri> errorUri = default;
+        if (rawErrorUri.HasValue)
+        {
+            if (!Uri.TryCreate(rawErrorUri.Value, UriKind.RelativeOrAbsolute, out var parsedErrorUri))
+            {
+                return false;
+            }
+
+            errorUri = parsedErrorUri;
+        }
+
+        _ = properties.TryGetValue("state", out Optional<string> state);
+
+        response = new AuthorizationCodeAuthorizationErrorResponse(error, errorDescription, errorUri, state);
+        return true;
+    }
+}
