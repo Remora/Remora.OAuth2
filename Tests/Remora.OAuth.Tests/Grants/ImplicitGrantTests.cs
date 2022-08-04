@@ -253,6 +253,20 @@ public static class ImplicitGrantTests
             }
 
             /// <summary>
+            /// Tests whether the method requires a fragment to be present.
+            /// </summary>
+            [Fact]
+            public static void RequiresFragment()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net"
+                );
+
+                Assert.False(ImplicitAccessTokenErrorResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
             /// Tests whether the method requires a certain property to be present.
             /// </summary>
             [Fact]
@@ -301,6 +315,24 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method requires a certain property to be in a certain format.
+            /// </summary>
+            [Fact]
+            public static void RequiresWellFormedErrorUri()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net#"
+                    + "error=ooga&"
+                    + "error_description=booga&"
+                    + "error_uri=https://example.com<>&"
+                    + "state=wooga"
+                );
+
+                Assert.False(ImplicitAccessTokenErrorResponse.TryParse(value, out _));
             }
 
             /// <summary>
