@@ -464,6 +464,24 @@ public static class AuthorizationCodeGrantTests
             }
 
             /// <summary>
+            /// Tests whether the method requires a certain property to be in a certain format.
+            /// </summary>
+            [Fact]
+            public static void RequiresWellFormedErrorUri()
+            {
+                var value = new Uri
+                (
+                    "https://my-uri.net?"
+                    + "error=ooga&"
+                    + "error_description=booga&"
+                    + "error_uri=https://example.com<>&"
+                    + "state=wooga"
+                );
+
+                Assert.False(AuthorizationCodeAuthorizationErrorResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
             /// Tests whether the method does not require a certain property to be present.
             /// </summary>
             [Fact]
