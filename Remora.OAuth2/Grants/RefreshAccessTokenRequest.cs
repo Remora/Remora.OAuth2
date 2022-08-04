@@ -36,8 +36,8 @@ namespace Remora.OAuth2;
 public record RefreshAccessTokenRequest
 (
     string RefreshToken,
-    Optional<IReadOnlyList<string>> Scope,
-    Optional<IReadOnlyList<IRefreshAccessTokenRequestExtension>> Extensions = default
+    Optional<IReadOnlyList<string>> Scope = default,
+    Optional<IReadOnlyList<IAccessTokenRequestExtension>> Extensions = default
 ) : IRefreshAccessTokenRequest
 {
     /// <inheritdoc />
