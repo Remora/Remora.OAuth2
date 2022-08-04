@@ -62,16 +62,3 @@ public interface IAccessTokenRequestExtension : IRequestExtension
     /// <param name="collection">The collection.</param>
     void AddParameters(IDictionary<string, string> collection);
 }
-
-/// <summary>
-/// Marks a type as being a refresh access token request extension.
-/// </summary>
-[PublicAPI]
-public interface IRefreshAccessTokenRequestExtension : IRequestExtension
-{
-    /// <summary>
-    /// Adds the record's parameters to the given collection.
-    /// </summary>
-    /// <param name="collection">The collection.</param>
-    void AddParameters(IDictionary<string, string> collection);
-}
