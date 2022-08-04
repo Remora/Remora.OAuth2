@@ -63,4 +63,31 @@ internal static class DictionaryExtensions
 
         collection.Add(name, string.Join(' ', value.Value));
     }
+
+    /// <summary>
+    /// Attempts to retrieve the value from the dictionary with the given key.
+    /// </summary>
+    /// <param name="dictionary">The dictionary.</param>
+    /// <param name="key">The key.</param>
+    /// <param name="value">The value, or an unspecified optional.</param>
+    /// <typeparam name="TKey">The key type.</typeparam>
+    /// <typeparam name="TValue">The value type.</typeparam>
+    /// <returns>true if a value was retrieved; otherwise, false.</returns>
+    public static bool TryGetValue<TKey, TValue>
+    (
+        this IReadOnlyDictionary<TKey, TValue> dictionary,
+        TKey key,
+        out Optional<TValue> value
+    )
+    {
+        value = default;
+
+        if (!dictionary.TryGetValue(key, out var realValue))
+        {
+            return false;
+        }
+
+        value = realValue;
+        return true;
+    }
 }

@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Web;
 using Remora.OAuth.Tests.TestBases;
 using Remora.OAuth2;
 using Remora.OAuth2.Abstractions.OAuthExtensions;
@@ -255,6 +256,64 @@ public static class AuthorizationCodeGrantTests
                     },
                     true
                 );
+            }
+        }
+    }
+
+    /// <summary>
+    /// Tests the <see cref="AuthorizationCodeAuthorizationResponse"/> class.
+    /// </summary>
+    public static class AuthorizationCodeAuthorizationResponseTests
+    {
+        /// <summary>
+        /// Tests the <see cref="AuthorizationCodeAuthorizationResponse.TryParse"/> method.
+        /// </summary>
+        public static class TryParse
+        {
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseCodeCorrectly()
+            {
+                var expected = "some code";
+
+                var value = new Uri($"https://my-uri.net?code={HttpUtility.UrlEncode(expected)}&state=booga");
+                Assert.True(AuthorizationCodeAuthorizationResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.Code);
+            }
+
+            /// <summary>
+            /// Tests whether the method can parse a property correctly.
+            /// </summary>
+            [Fact]
+            public static void CanParseStateCorrectly()
+            {
+                var expected = "some state";
+
+                var value = new Uri($"https://my-uri.net?code=ooga&state={HttpUtility.UrlEncode(expected)}");
+                Assert.True(AuthorizationCodeAuthorizationResponse.TryParse(value, out var response));
+                Assert.Equal(expected, response.State);
+            }
+
+            /// <summary>
+            /// Tests whether the method requires a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void RequiresCode()
+            {
+                var value = new Uri("https://my-uri.net?state=booga");
+                Assert.False(AuthorizationCodeAuthorizationResponse.TryParse(value, out _));
+            }
+
+            /// <summary>
+            /// Tests whether the method does not require a certain property to be present.
+            /// </summary>
+            [Fact]
+            public static void DoesNotRequireState()
+            {
+                var value = new Uri($"https://my-uri.net?code=booga");
+                Assert.True(AuthorizationCodeAuthorizationResponse.TryParse(value, out _));
             }
         }
     }

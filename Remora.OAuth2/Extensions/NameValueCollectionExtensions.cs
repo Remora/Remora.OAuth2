@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using Remora.Rest.Core;
 
 namespace Remora.OAuth2.Extensions;
@@ -63,5 +64,20 @@ internal static class NameValueCollectionExtensions
         }
 
         collection.Add(name, string.Join(' ', value.Value));
+    }
+
+    /// <summary>
+    /// Converts a <see cref="NameValueCollection"/> to a dictionary.
+    /// </summary>
+    /// <param name="collection">The collection.</param>
+    /// <returns>The dictionary.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if any encountered key is null.</exception>
+    public static IReadOnlyDictionary<string, string> ToDictionary(this NameValueCollection collection)
+    {
+        return collection.AllKeys.ToDictionary
+        (
+            k => k ?? throw new InvalidOperationException(),
+            k => collection[k] ?? string.Empty
+        );
     }
 }

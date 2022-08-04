@@ -20,8 +20,12 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Web;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions;
+using Remora.OAuth2.Extensions;
 using Remora.Rest.Core;
 
 namespace Remora.OAuth2;
@@ -29,4 +33,27 @@ namespace Remora.OAuth2;
 /// <inheritdoc />
 [PublicAPI]
 public record AuthorizationCodeAuthorizationResponse(string Code, Optional<string> State = default)
-    : IAuthorizationCodeAuthorizationResponse;
+    : IAuthorizationCodeAuthorizationResponse
+{
+    /// <summary>
+    /// Attempts to parse an authorization response from the given URI, visited by the user agent.
+    /// </summary>
+    /// <param name="location">The visited URI.</param>
+    /// <param name="response">The parsed response.</param>
+    /// <returns>true if a valid response was parsed; otherwise, false.</returns>
+    public static bool TryParse(Uri location, [NotNullWhen(true)] out IAuthorizationCodeAuthorizationResponse? response)
+    {
+        response = null;
+
+        var properties = HttpUtility.ParseQueryString(location.Query).ToDictionary();
+        if (!properties.TryGetValue("code", out var code))
+        {
+            return false;
+        }
+
+        _ = properties.TryGetValue("state", out Optional<string> state);
+
+        response = new AuthorizationCodeAuthorizationResponse(code, state);
+        return true;
+    }
+}
