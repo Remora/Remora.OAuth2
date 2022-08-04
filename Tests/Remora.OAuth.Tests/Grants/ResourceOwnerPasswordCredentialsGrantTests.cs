@@ -131,4 +131,20 @@ public static class ResourceOwnerPasswordCredentialsGrantTests
             }
         }
     }
+
+    /// <summary>
+    /// Tests the <see cref="ResourceOwnerPasswordCredentialsAccessTokenErrorResponse"/> class.
+    /// </summary>
+    public class ResourceOwnerPasswordCredentialsAccessTokenErrorResponseTests :
+        JsonBackedTypeTestBase<ResourceOwnerPasswordCredentialsAccessTokenErrorResponse>
+    {
+    }
+
+    /// <summary>
+    /// Tests the <see cref="ResourceOwnerPasswordCredentialsAccessTokenResponse"/> class.
+    /// </summary>
+    public class ResourceOwnerPasswordCredentialsAccessTokenResponseTests :
+        JsonBackedTypeTestBase<ResourceOwnerPasswordCredentialsAccessTokenResponse>
+    {
+    }
 }

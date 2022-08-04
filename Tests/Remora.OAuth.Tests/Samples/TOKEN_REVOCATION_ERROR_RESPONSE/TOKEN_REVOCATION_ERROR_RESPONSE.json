@@ -1,0 +1,5 @@
+{
+    "error": "invalid_request",
+    "error_description": "Missing parameter",
+    "error_uri": "https://example.org"
+}

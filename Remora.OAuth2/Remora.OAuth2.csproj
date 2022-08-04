@@ -12,4 +12,8 @@
       <ProjectReference Include="..\Remora.OAuth2.Abstractions\Remora.OAuth2.Abstractions.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Remora.Rest" Version="2.0.5" />
+    </ItemGroup>
+    
 </Project>

@@ -88,4 +88,12 @@ public static class TokenRevocationTests
             }
         }
     }
+
+    /// <summary>
+    /// Tests the <see cref="TokenRevocationErrorResponse"/> class.
+    /// </summary>
+    public class DeviceAuthorizationAuthorizationResponseTests :
+        JsonBackedTypeTestBase<TokenRevocationErrorResponse>
+    {
+    }
 }

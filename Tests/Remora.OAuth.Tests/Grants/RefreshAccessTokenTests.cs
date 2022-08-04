@@ -117,4 +117,20 @@ public class RefreshAccessTokenTests
             }
         }
     }
+
+    /// <summary>
+    /// Tests the <see cref="RefreshAccessTokenErrorResponse"/> class.
+    /// </summary>
+    public class RefreshAccessTokenErrorResponseTests :
+        JsonBackedTypeTestBase<RefreshAccessTokenErrorResponse>
+    {
+    }
+
+    /// <summary>
+    /// Tests the <see cref="RefreshAccessTokenResponse"/> class.
+    /// </summary>
+    public class RefreshAccessTokenResponseTests :
+        JsonBackedTypeTestBase<RefreshAccessTokenResponse>
+    {
+    }
 }

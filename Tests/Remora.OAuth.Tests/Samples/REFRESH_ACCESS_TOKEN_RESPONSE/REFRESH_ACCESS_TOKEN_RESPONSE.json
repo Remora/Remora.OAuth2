@@ -1,0 +1,6 @@
+{
+    "access_token": "token",
+    "token_type": "Bearer",
+    "expires_in": 1,
+    "scope": "some valid values"
+}

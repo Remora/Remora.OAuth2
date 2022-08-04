@@ -1,0 +1,6 @@
+{
+    "device_code": "device-code",
+    "user_code": "user-code",
+    "verification_uri": "https://example.org",
+    "expires_in": 1
+}

@@ -499,4 +499,20 @@ public static class AuthorizationCodeGrantTests
             }
         }
     }
+
+    /// <summary>
+    /// Tests the <see cref="AuthorizationCodeAccessTokenErrorResponse"/> class.
+    /// </summary>
+    public class AuthorizationCodeAccessTokenErrorResponseTests :
+        JsonBackedTypeTestBase<AuthorizationCodeAccessTokenErrorResponse>
+    {
+    }
+
+    /// <summary>
+    /// Tests the <see cref="AuthorizationCodeAccessTokenResponse"/> class.
+    /// </summary>
+    public class AuthorizationCodeAccessTokenResponseTests :
+        JsonBackedTypeTestBase<AuthorizationCodeAccessTokenResponse>
+    {
+    }
 }
