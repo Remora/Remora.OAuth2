@@ -110,7 +110,11 @@ public abstract class AccessTokenRequestTestsBase<TAccessTokenRequest> where TAc
         var request = this.BlankRequestFactory();
         var message = request.ToRequest(expected);
 
-        Assert.Equal(expected, message.RequestUri);
+        message.HasQueryParameters(new Dictionary<string, string>
+        {
+            { "parameter", "value" },
+            { "other", "something" },
+        });
     }
 
     /// <summary>
