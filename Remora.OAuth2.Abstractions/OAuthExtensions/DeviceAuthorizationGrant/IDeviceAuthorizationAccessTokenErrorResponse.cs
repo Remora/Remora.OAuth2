@@ -1,5 +1,5 @@
 //
-//  IDeviceAccessTokenResponse.cs
+//  IDeviceAuthorizationAccessTokenErrorResponse.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -21,18 +21,13 @@
 //
 
 using JetBrains.Annotations;
-using Remora.Rest.Core;
 
 namespace Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 
 /// <summary>
-/// Represents an access token response for a token granted via the use of an external device.
+/// Represents a failure to perform some remote operation when requesting a token.
 /// </summary>
 [PublicAPI]
-public interface IDeviceAccessTokenResponse : IAccessTokenResponse
+public interface IDeviceAuthorizationAccessTokenErrorResponse : IAccessTokenErrorResponse
 {
-    /// <summary>
-    /// Gets the refresh token.
-    /// </summary>
-    Optional<string> RefreshToken { get; }
 }

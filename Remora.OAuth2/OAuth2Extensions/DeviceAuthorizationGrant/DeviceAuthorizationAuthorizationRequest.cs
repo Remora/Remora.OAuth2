@@ -1,5 +1,5 @@
 //
-//  DeviceAccessTokenResponse.cs
+//  DeviceAuthorizationAuthorizationRequest.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -22,19 +22,44 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using JetBrains.Annotations;
 using Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
+using Remora.OAuth2.Extensions;
 using Remora.Rest.Core;
 
 namespace Remora.OAuth2.OAuth2Extensions.DeviceAuthorizationGrant;
 
 /// <inheritdoc />
 [PublicAPI]
-public record DeviceAccessTokenResponse
+public record DeviceAuthorizationAuthorizationRequest
 (
-    string AccessToken,
-    string TokenType,
-    Optional<TimeSpan> ExpiresIn = default,
+    Optional<string> ClientID = default,
     Optional<IReadOnlyList<string>> Scope = default,
-    Optional<string> RefreshToken = default
-) : IDeviceAccessTokenResponse;
+    Optional<IReadOnlyList<IDeviceAuthorizationAuthorizationRequestExtension>> Extensions = default
+) : IDeviceAuthorizationAuthorizationRequest
+{
+    /// <inheritdoc />
+    public HttpRequestMessage ToRequest(Uri deviceAuthorizationEndpoint)
+    {
+        var parameters = new Dictionary<string, string>
+        {
+            { "client_id", this.ClientID },
+            { "scope", this.Scope },
+        };
+
+        // ReSharper disable once InvertIf
+        if (this.Extensions.IsDefined(out var extensions))
+        {
+            foreach (var requestExtension in extensions)
+            {
+                requestExtension.AddParameters(parameters);
+            }
+        }
+
+        return new HttpRequestMessage(HttpMethod.Post, deviceAuthorizationEndpoint)
+        {
+            Content = new FormUrlEncodedContent(parameters)
+        };
+    }
+}

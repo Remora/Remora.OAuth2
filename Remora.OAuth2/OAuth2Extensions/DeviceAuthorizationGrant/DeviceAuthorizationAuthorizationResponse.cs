@@ -1,5 +1,5 @@
 //
-//  IDeviceAccessTokenErrorResponse.cs
+//  DeviceAuthorizationAuthorizationResponse.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -20,14 +20,21 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+using System;
 using JetBrains.Annotations;
+using Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
+using Remora.Rest.Core;
 
-namespace Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
+namespace Remora.OAuth2.OAuth2Extensions.DeviceAuthorizationGrant;
 
-/// <summary>
-/// Represents a failure to perform some remote operation when requesting a token.
-/// </summary>
+/// <inheritdoc />
 [PublicAPI]
-public interface IDeviceAccessTokenErrorResponse : IAccessTokenErrorResponse
-{
-}
+public record DeviceAuthorizationAuthorizationResponse
+(
+    string DeviceCode,
+    string UserCode,
+    Uri VerificationUri,
+    TimeSpan ExpiresIn,
+    Optional<Uri> VerificationUriComplete = default,
+    Optional<TimeSpan> Interval = default
+) : IDeviceAuthorizationAuthorizationResponse;

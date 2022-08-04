@@ -1,5 +1,5 @@
 //
-//  IDeviceAuthorizationRequestExtension.cs
+//  IDeviceAuthorizationAccessTokenResponse.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -20,20 +20,19 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Collections.Generic;
 using JetBrains.Annotations;
+using Remora.Rest.Core;
 
 namespace Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 
 /// <summary>
-/// Marks a type as being an access token request extension.
+/// Represents an access token response for a token granted via the use of an external device.
 /// </summary>
 [PublicAPI]
-public interface IDeviceAuthorizationRequestExtension : IRequestExtension
+public interface IDeviceAuthorizationAccessTokenResponse : IAccessTokenResponse
 {
     /// <summary>
-    /// Adds the record's parameters to the given collection.
+    /// Gets the refresh token.
     /// </summary>
-    /// <param name="collection">The collection.</param>
-    void AddParameters(IDictionary<string, string> collection);
+    Optional<string> RefreshToken { get; }
 }

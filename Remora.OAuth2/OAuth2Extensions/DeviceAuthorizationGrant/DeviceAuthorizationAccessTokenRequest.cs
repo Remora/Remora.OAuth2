@@ -1,5 +1,5 @@
 //
-//  DeviceAuthorizationRequest.cs
+//  DeviceAuthorizationAccessTokenRequest.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using JetBrains.Annotations;
+using Remora.OAuth2.Abstractions;
 using Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 using Remora.OAuth2.Extensions;
 using Remora.Rest.Core;
@@ -32,20 +33,21 @@ namespace Remora.OAuth2.OAuth2Extensions.DeviceAuthorizationGrant;
 
 /// <inheritdoc />
 [PublicAPI]
-public record DeviceAuthorizationRequest
+public record DeviceAuthorizationAccessTokenRequest
 (
+    string DeviceCode,
     Optional<string> ClientID = default,
-    Optional<IReadOnlyList<string>> Scope = default,
-    Optional<IReadOnlyList<IDeviceAuthorizationRequestExtension>> Extensions = default
-) : IDeviceAuthorizationRequest
+    Optional<IReadOnlyList<IDeviceAuthorizationAccessTokenRequestExtension>> Extensions = default
+) : IDeviceAuthorizationAccessTokenRequest
 {
     /// <inheritdoc />
-    public HttpRequestMessage ToRequest(Uri deviceAuthorizationEndpoint)
+    public HttpRequestMessage ToRequest(Uri tokenEndpoint)
     {
         var parameters = new Dictionary<string, string>
         {
+            { "grant_type", ((IAccessTokenRequest)this).GrantType },
+            { "device_code", this.DeviceCode },
             { "client_id", this.ClientID },
-            { "scope", this.Scope },
         };
 
         // ReSharper disable once InvertIf
@@ -57,7 +59,7 @@ public record DeviceAuthorizationRequest
             }
         }
 
-        return new HttpRequestMessage(HttpMethod.Post, deviceAuthorizationEndpoint)
+        return new HttpRequestMessage(HttpMethod.Post, tokenEndpoint)
         {
             Content = new FormUrlEncodedContent(parameters)
         };

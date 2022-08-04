@@ -1,5 +1,5 @@
 //
-//  IDeviceAccessTokenRequestExtension.cs
+//  IDeviceAuthorizationAuthorizationErrorResponse.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -20,20 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 
 /// <summary>
-/// Marks a type as being an access token request extension.
+/// Represents a failure to perform some remote operation when requesting a token.
 /// </summary>
 [PublicAPI]
-public interface IDeviceAccessTokenRequestExtension : IRequestExtension
+public interface IDeviceAuthorizationAuthorizationErrorResponse : IAccessTokenErrorResponse
 {
-    /// <summary>
-    /// Adds the record's parameters to the given collection.
-    /// </summary>
-    /// <param name="collection">The collection.</param>
-    void AddParameters(IDictionary<string, string> collection);
 }

@@ -1,5 +1,5 @@
 //
-//  DeviceAuthorizationResponse.cs
+//  IDeviceAuthorizationAccessTokenRequest.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -20,19 +20,25 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-using System;
-using Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 using Remora.Rest.Core;
 
-namespace Remora.OAuth2.OAuth2Extensions.DeviceAuthorizationGrant;
+namespace Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 
-/// <inheritdoc />
-public record DeviceAuthorizationResponse
-(
-    string DeviceCode,
-    string UserCode,
-    Uri VerificationUri,
-    TimeSpan ExpiresIn,
-    Optional<Uri> VerificationUriComplete = default,
-    Optional<TimeSpan> Interval = default
-) : IDeviceAuthorizationResponse;
+/// <summary>
+/// Represents a request for an access token granted via the use of an external device.
+/// </summary>
+public interface IDeviceAuthorizationAccessTokenRequest : IAccessTokenRequest
+{
+    /// <inheritdoc/>
+    string IAccessTokenRequest.GrantType => "urn:ietf:params:oauth:grant-type:device_code";
+
+    /// <summary>
+    /// Gets the device verification code.
+    /// </summary>
+    string DeviceCode { get; }
+
+    /// <summary>
+    /// Gets the identifier of the client.
+    /// </summary>
+    Optional<string> ClientID { get; }
+}

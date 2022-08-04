@@ -1,5 +1,5 @@
 //
-//  DeviceAuthorizationErrorResponse.cs
+//  DeviceAuthorizationAuthorizationErrorResponse.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -29,9 +29,9 @@ namespace Remora.OAuth2.OAuth2Extensions.DeviceAuthorizationGrant;
 
 /// <inheritdoc />
 [PublicAPI]
-public record DeviceAuthorizationErrorResponse
+public record DeviceAuthorizationAuthorizationErrorResponse
 (
     string Error,
     Optional<string> ErrorDescription = default,
     Optional<Uri> ErrorUri = default
-) : IDeviceAuthorizationErrorResponse;
+) : IDeviceAuthorizationAuthorizationErrorResponse;

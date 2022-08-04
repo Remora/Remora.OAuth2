@@ -34,8 +34,8 @@ namespace Remora.OAuth.Tests.Fakes;
 public class FakeExtension :
     IAuthorizationRequestExtension,
     IAccessTokenRequestExtension,
-    IDeviceAuthorizationRequestExtension,
-    IDeviceAccessTokenRequestExtension,
+    IDeviceAuthorizationAuthorizationRequestExtension,
+    IDeviceAuthorizationAccessTokenRequestExtension,
     ITokenRevocationRequestExtension
 {
     /// <summary>

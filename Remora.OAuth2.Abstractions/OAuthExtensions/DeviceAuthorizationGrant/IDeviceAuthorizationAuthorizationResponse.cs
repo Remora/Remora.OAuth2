@@ -1,5 +1,5 @@
 //
-//  IDeviceAuthorizationRequest.cs
+//  IDeviceAuthorizationAuthorizationResponse.cs
 //
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
@@ -21,35 +21,45 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using JetBrains.Annotations;
 using Remora.Rest.Core;
 
 namespace Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 
 /// <summary>
-/// Represents a request to initiate an authorization flow on a separate device.
+/// Represents a response to a device authorization request.
 /// </summary>
 [PublicAPI]
-public interface IDeviceAuthorizationRequest
+public interface IDeviceAuthorizationAuthorizationResponse
 {
     /// <summary>
-    /// Gets the identifier of the client.
+    /// Gets the device verification code.
     /// </summary>
-    Optional<string> ClientID { get; }
+    string DeviceCode { get; }
 
     /// <summary>
-    /// Gets the requested scope of the access token.
+    /// Gets the end-user verification code.
     /// </summary>
-    Optional<IReadOnlyList<string>> Scope { get; }
+    string UserCode { get; }
 
     /// <summary>
-    /// Creates an HTTP request from the information contained in the request object.
+    /// Gets the end-user verification URI on the authorization server.
     /// </summary>
-    /// <param name="deviceAuthorizationEndpoint">
-    /// The device authorization endpoint to use when constructing the request URI.
-    /// </param>
-    /// <returns>The constructed URI.</returns>
-    HttpRequestMessage ToRequest(Uri deviceAuthorizationEndpoint);
+    Uri VerificationUri { get; }
+
+    /// <summary>
+    /// Gets the lifetime of the device and user codes.
+    /// </summary>
+    TimeSpan ExpiresIn { get; }
+
+    /// <summary>
+    /// Gets the full verification URI that includes the user code or other similarly utilized information.
+    /// </summary>
+    Optional<Uri> VerificationUriComplete { get; }
+
+    /// <summary>
+    /// Gets the minimum amount of time that the client should wait between polling requests to the token endpoint. If
+    /// no value is provided, clients must use 5 seconds as the default.
+    /// </summary>
+    Optional<TimeSpan> Interval { get; }
 }
