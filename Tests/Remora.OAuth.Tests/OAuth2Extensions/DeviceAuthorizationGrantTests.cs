@@ -22,7 +22,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using Remora.OAuth.Tests.TestBases;
 using Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 using Remora.OAuth2.OAuth2Extensions.DeviceAuthorizationGrant;

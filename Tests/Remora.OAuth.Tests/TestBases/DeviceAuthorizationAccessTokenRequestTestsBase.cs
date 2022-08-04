@@ -24,8 +24,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using Remora.OAuth.Tests.Fakes;
-using Remora.OAuth2.Abstractions;
-using Remora.OAuth2.Abstractions.OAuthExtensions;
 using Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 using Remora.Rest.Xunit.Extensions;
 using Xunit;
