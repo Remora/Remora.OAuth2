@@ -4,4 +4,8 @@
       <ProjectReference Include="..\..\Remora.OAuth2\Remora.OAuth2.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Remora.Rest.Xunit" Version="1.2.0" />
+    </ItemGroup>
+
 </Project>
