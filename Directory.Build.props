@@ -39,10 +39,10 @@
         <EmbedAllSources>true</EmbedAllSources>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-        <RepositoryUrl>https://github.com/Nihlus/Remora.OAuth2</RepositoryUrl>
+        <RepositoryUrl>https://github.com/Remora/Remora.OAuth2</RepositoryUrl>
         <RepositoryBranch>main</RepositoryBranch>
         <PackageOutputPath>$(MSBuildThisFileDirectory)nuget</PackageOutputPath>
-        <PackageProjectUrl>https://github.com/Nihlus/Remora.OAuth2</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/Remora/Remora.OAuth2</PackageProjectUrl>
         <PackageTags>authentication;oauth2;oauth;api;</PackageTags>
         <PackageIcon>shark.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>

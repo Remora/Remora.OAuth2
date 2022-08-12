@@ -67,7 +67,7 @@ If you wish to use or develop the library further, you will need to compile it
 from source.
 
 ```bash
-git clone git@github.com:Nihlus/Remora.OAuth2.git
+git clone git@github.com:Remora/Remora.OAuth2.git
 cd Remora.OAuth2
 dotnet build
 dotnet pack -c Release
@@ -112,7 +112,7 @@ from is tagged with the year and an incremental release number - for example,
 Whenever a new push to `main` is made, a new set of packages based on the 
 latest commit will be published to GitHub Packages.
 
-The URL of the NuGet source is `https://nuget.pkg.github.com/Nihlus/index.json`.  
+The URL of the NuGet source is `https://nuget.pkg.github.com/Remora/index.json`.  
 As the NuGet source requires authentication, follow GitHub's instructions: [here][9]
 
 ## 6. Contributing
@@ -127,5 +127,5 @@ Icon by [Twemoji][6], licensed under CC-BY 4.0.
 [4]: https://discord.gg/tRJbg8HNdt
 [5]: https://img.shields.io/static/v1?label=Chat&message=on%20Discord&color=7289da&logo=Discord
 [6]: https://twemoji.twitter.com/
-[8]: https://github.com/Nihlus?tab=packages&repo_name=Remora.OAuth2
+[8]: https://github.com/Remora?tab=packages&repo_name=Remora.OAuth2
 [9]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-nuget-registry#authenticating-to-github-packages
