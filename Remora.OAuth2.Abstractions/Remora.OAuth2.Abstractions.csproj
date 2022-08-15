@@ -1,4 +1,4 @@
-<Project Sdk="Remora.Sdk/1.0.0-preview3">
+<Project Sdk="Remora.Sdk/1.0.0-preview6">
     <PropertyGroup>
         <VersionPrefix>1.0.0-alpha</VersionPrefix>
         <Description>Remora.OAuth2's implementation of OAuth2's API objects</Description>
