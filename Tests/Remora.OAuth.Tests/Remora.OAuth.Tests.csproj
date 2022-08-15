@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Remora.Tests.Sdk/1.0.0-preview3">
     <ItemGroup>
       <ProjectReference Include="..\..\Remora.OAuth2\Remora.OAuth2.csproj" />
     </ItemGroup>
@@ -9,12 +8,11 @@
       <PackageReference Include="Remora.Rest.Xunit" Version="1.2.0" />
       <PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <EmbeddedResource Include="Samples\**\*" />
         <Content Include="Samples\**\*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
-
 </Project>

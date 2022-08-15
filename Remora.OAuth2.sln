@@ -3,9 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remora.OAuth2", "Remora.OAuth2\Remora.OAuth2.csproj", "{36B8CDA3-43E5-4C81-9DF5-BA076CAAA82F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D1EE58E5-0BDC-42CC-8697-D95EC05C0088}"
-	ProjectSection(SolutionItems) = preProject
-		Tests\Directory.Build.props = Tests\Directory.Build.props
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remora.OAuth.Tests", "Tests\Remora.OAuth.Tests\Remora.OAuth.Tests.csproj", "{43E6A2DC-8C15-4558-A784-EAC226663353}"
 EndProject
@@ -13,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remora.OAuth2.Abstractions"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "metadata", "metadata", "{3E5534A1-FF36-43EE-AEA9-F7A25C6A48FB}"
 	ProjectSection(SolutionItems) = preProject
-		stylecop.json = stylecop.json
-		stylecop.ruleset = stylecop.ruleset
 		Directory.Build.props = Directory.Build.props
 		README.md = README.md
 	EndProjectSection

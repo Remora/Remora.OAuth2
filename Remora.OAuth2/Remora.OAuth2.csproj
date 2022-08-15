@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Remora.Sdk/1.0.0-preview3">
     <PropertyGroup>
         <VersionPrefix>1.0.0-alpha</VersionPrefix>
         <Description>Remora.OAuth2's implementation of OAuth2's API objects</Description>
@@ -15,5 +14,4 @@
     <ItemGroup>
       <PackageReference Include="Remora.Rest" Version="2.0.5" />
     </ItemGroup>
-    
 </Project>

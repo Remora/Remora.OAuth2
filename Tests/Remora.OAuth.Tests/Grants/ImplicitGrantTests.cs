@@ -4,7 +4,7 @@
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
 //
-//  Copyright (c) 2017 Jarl Gullberg
+//  Copyright (c) Jarl Gullberg
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -186,7 +186,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response.Error);
+                Assert.Equal(expected, response!.Error);
             }
 
             /// <summary>
@@ -207,7 +207,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response.ErrorDescription);
+                Assert.Equal(expected, response!.ErrorDescription);
             }
 
             /// <summary>
@@ -228,7 +228,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
-                Assert.Equal(new Uri(expected), response.ErrorUri);
+                Assert.Equal(new Uri(expected), response!.ErrorUri);
             }
 
             /// <summary>
@@ -249,7 +249,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response.State);
+                Assert.Equal(expected, response!.State);
             }
 
             /// <summary>
@@ -383,7 +383,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response.AccessToken);
+                Assert.Equal(expected, response!.AccessToken);
             }
 
             /// <summary>
@@ -405,7 +405,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response.TokenType);
+                Assert.Equal(expected, response!.TokenType);
             }
 
             /// <summary>
@@ -426,7 +426,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response.ExpiresIn);
+                Assert.Equal(expected, response!.ExpiresIn);
             }
 
             /// <summary>
@@ -448,7 +448,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected.Split(' ').AsEnumerable(), response.Scope.Value.AsEnumerable());
+                Assert.Equal(expected.Split(' ').AsEnumerable(), response!.Scope.Value.AsEnumerable());
             }
 
             /// <summary>
@@ -470,7 +470,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response.State);
+                Assert.Equal(expected, response!.State);
             }
 
             /// <summary>

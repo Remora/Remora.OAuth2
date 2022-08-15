@@ -4,7 +4,7 @@
 //  Author:
 //       Jarl Gullberg <jarl.gullberg@gmail.com>
 //
-//  Copyright (c) 2017 Jarl Gullberg
+//  Copyright (c) Jarl Gullberg
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -63,7 +63,7 @@ public record AuthorizationCodeAuthorizationRequest
             }
         }
 
-        builder.Query = queryParameters.ToString();
+        builder.Query = queryParameters.ToString() ?? throw new InvalidOperationException();
         return new HttpRequestMessage(HttpMethod.Get, builder.Uri);
     }
 }
