@@ -1,6 +1,6 @@
-<Project Sdk="Remora.Sdk/1.0.0">
+<Project Sdk="Remora.Sdk/2.0.1">
     <PropertyGroup>
-        <VersionPrefix>1.0.0-alpha1</VersionPrefix>
+        <VersionPrefix>1.0.0-alpha2</VersionPrefix>
         <Description>Remora.OAuth2's implementation of OAuth2's API objects</Description>
         <PackageReleaseNotes>
             Initial release.
@@ -12,6 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Remora.Rest" Version="3.0.0" />
+      <PackageReference Include="Remora.Rest" Version="3.1.1" />
     </ItemGroup>
 </Project>

@@ -186,7 +186,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.Error);
+                Assert.Equal(expected, response.Error);
             }
 
             /// <summary>
@@ -207,7 +207,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.ErrorDescription);
+                Assert.Equal(expected, response.ErrorDescription);
             }
 
             /// <summary>
@@ -228,7 +228,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
-                Assert.Equal(new Uri(expected), response!.ErrorUri);
+                Assert.Equal(new Uri(expected), response.ErrorUri);
             }
 
             /// <summary>
@@ -249,7 +249,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.State);
+                Assert.Equal(expected, response.State);
             }
 
             /// <summary>
@@ -383,7 +383,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.AccessToken);
+                Assert.Equal(expected, response.AccessToken);
             }
 
             /// <summary>
@@ -397,7 +397,7 @@ public static class ImplicitGrantTests
                 var value = new Uri
                 (
                     "https://my-uri.net#"
-                    + $"access_token=ooga&"
+                    + "access_token=ooga&"
                     + $"token_type={HttpUtility.UrlEncode(expected)}&"
                     + "expires_in=3600&"
                     + "scope=wooga&"
@@ -405,7 +405,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.TokenType);
+                Assert.Equal(expected, response.TokenType);
             }
 
             /// <summary>
@@ -418,15 +418,15 @@ public static class ImplicitGrantTests
                 var value = new Uri
                 (
                     "https://my-uri.net#"
-                    + $"access_token=ooga&"
-                    + $"token_type=mooga&"
+                    + "access_token=ooga&"
+                    + "token_type=mooga&"
                     + $"expires_in={expected.TotalSeconds:0}&"
                     + "scope=wooga&"
                     + "state=booga"
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.ExpiresIn);
+                Assert.Equal(expected, response.ExpiresIn);
             }
 
             /// <summary>
@@ -440,7 +440,7 @@ public static class ImplicitGrantTests
                 var value = new Uri
                 (
                     "https://my-uri.net#"
-                    + $"access_token=wooga&"
+                    + "access_token=wooga&"
                     + "token_type=ooga&"
                     + "expires_in=3600&"
                     + $"scope={HttpUtility.UrlEncode(expected)}&"
@@ -448,7 +448,7 @@ public static class ImplicitGrantTests
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected.Split(' ').AsEnumerable(), response!.Scope.Value.AsEnumerable());
+                Assert.Equal(expected.Split(' ').AsEnumerable(), response.Scope.Value.AsEnumerable());
             }
 
             /// <summary>
@@ -462,15 +462,15 @@ public static class ImplicitGrantTests
                 var value = new Uri
                 (
                     "https://my-uri.net#"
-                    + $"access_token=wooga&"
+                    + "access_token=wooga&"
                     + "token_type=ooga&"
                     + "expires_in=3600&"
-                    + $"scope=booga&"
+                    + "scope=booga&"
                     + $"state={HttpUtility.UrlEncode(expected)}"
                 );
 
                 Assert.True(ImplicitAccessTokenResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.State);
+                Assert.Equal(expected, response.State);
             }
 
             /// <summary>

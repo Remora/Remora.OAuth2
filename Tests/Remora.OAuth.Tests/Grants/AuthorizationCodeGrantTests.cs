@@ -280,7 +280,7 @@ public static class AuthorizationCodeGrantTests
 
                 var value = new Uri($"https://my-uri.net?code={HttpUtility.UrlEncode(expected)}&state=booga");
                 Assert.True(AuthorizationCodeAuthorizationResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.Code);
+                Assert.Equal(expected, response.Code);
             }
 
             /// <summary>
@@ -293,7 +293,7 @@ public static class AuthorizationCodeGrantTests
 
                 var value = new Uri($"https://my-uri.net?code=ooga&state={HttpUtility.UrlEncode(expected)}");
                 Assert.True(AuthorizationCodeAuthorizationResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.State);
+                Assert.Equal(expected, response.State);
             }
 
             /// <summary>
@@ -346,7 +346,7 @@ public static class AuthorizationCodeGrantTests
                 );
 
                 Assert.True(AuthorizationCodeAuthorizationErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.Error);
+                Assert.Equal(expected, response.Error);
             }
 
             /// <summary>
@@ -367,7 +367,7 @@ public static class AuthorizationCodeGrantTests
                 );
 
                 Assert.True(AuthorizationCodeAuthorizationErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.ErrorDescription);
+                Assert.Equal(expected, response.ErrorDescription);
             }
 
             /// <summary>
@@ -388,7 +388,7 @@ public static class AuthorizationCodeGrantTests
                 );
 
                 Assert.True(AuthorizationCodeAuthorizationErrorResponse.TryParse(value, out var response));
-                Assert.Equal(new Uri(expected), response!.ErrorUri);
+                Assert.Equal(new Uri(expected), response.ErrorUri);
             }
 
             /// <summary>
@@ -409,7 +409,7 @@ public static class AuthorizationCodeGrantTests
                 );
 
                 Assert.True(AuthorizationCodeAuthorizationErrorResponse.TryParse(value, out var response));
-                Assert.Equal(expected, response!.State);
+                Assert.Equal(expected, response.State);
             }
 
             /// <summary>
