@@ -1,12 +1,12 @@
-<Project Sdk="Remora.Tests.Sdk/2.0.2">
+<Project Sdk="Remora.Tests.Sdk">
     <ItemGroup>
       <ProjectReference Include="..\..\Remora.OAuth2\Remora.OAuth2.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Humanizer.Core" Version="2.14.1" />
-      <PackageReference Include="Remora.Rest.Xunit" Version="2.0.1" />
-      <PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
+      <PackageReference Include="Humanizer.Core" />
+      <PackageReference Include="Remora.Rest.Xunit" />
+      <PackageReference Include="Xunit.SkippableFact" />
     </ItemGroup>
 
     <ItemGroup>
