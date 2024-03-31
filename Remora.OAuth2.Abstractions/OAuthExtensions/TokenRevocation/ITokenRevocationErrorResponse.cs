@@ -28,6 +28,4 @@ namespace Remora.OAuth2.Abstractions.OAuthExtensions.TokenRevocation;
 /// Represents a failure to perform some remote operation when revoking a token.
 /// </summary>
 [PublicAPI]
-public interface ITokenRevocationErrorResponse : IAccessTokenErrorResponse
-{
-}
+public interface ITokenRevocationErrorResponse : IAccessTokenErrorResponse;

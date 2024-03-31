@@ -100,15 +100,11 @@ public static class ClientCredentialsGrantTests
     /// Tests the <see cref="ClientCredentialsAccessTokenErrorResponse"/> class.
     /// </summary>
     public class ClientCredentialsAccessTokenErrorResponseTests :
-        JsonBackedTypeTestBase<ClientCredentialsAccessTokenErrorResponse>
-    {
-    }
+        JsonBackedTypeTestBase<ClientCredentialsAccessTokenErrorResponse>;
 
     /// <summary>
     /// Tests the <see cref="ClientCredentialsAccessTokenResponse"/> class.
     /// </summary>
     public class ClientCredentialsAccessTokenResponseTests :
-        JsonBackedTypeTestBase<ClientCredentialsAccessTokenResponse>
-    {
-    }
+        JsonBackedTypeTestBase<ClientCredentialsAccessTokenResponse>;
 }

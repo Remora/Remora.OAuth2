@@ -152,31 +152,23 @@ public class DeviceAuthorizationGrantTests
     /// Tests the <see cref="DeviceAuthorizationAccessTokenErrorResponse"/> class.
     /// </summary>
     public class DeviceAuthorizationAccessTokenErrorResponseTests :
-        JsonBackedTypeTestBase<DeviceAuthorizationAccessTokenErrorResponse>
-    {
-    }
+        JsonBackedTypeTestBase<DeviceAuthorizationAccessTokenErrorResponse>;
 
     /// <summary>
     /// Tests the <see cref="DeviceAuthorizationAccessTokenResponse"/> class.
     /// </summary>
     public class DeviceAuthorizationAccessTokenResponseTests :
-        JsonBackedTypeTestBase<DeviceAuthorizationAccessTokenResponse>
-    {
-    }
+        JsonBackedTypeTestBase<DeviceAuthorizationAccessTokenResponse>;
 
     /// <summary>
     /// Tests the <see cref="DeviceAuthorizationAuthorizationErrorResponse"/> class.
     /// </summary>
     public class DeviceAuthorizationAuthorizationErrorResponseTests :
-        JsonBackedTypeTestBase<DeviceAuthorizationAuthorizationErrorResponse>
-    {
-    }
+        JsonBackedTypeTestBase<DeviceAuthorizationAuthorizationErrorResponse>;
 
     /// <summary>
     /// Tests the <see cref="DeviceAuthorizationAuthorizationResponse"/> class.
     /// </summary>
     public class DeviceAuthorizationAuthorizationResponseTests :
-        JsonBackedTypeTestBase<DeviceAuthorizationAuthorizationResponse>
-    {
-    }
+        JsonBackedTypeTestBase<DeviceAuthorizationAuthorizationResponse>;
 }

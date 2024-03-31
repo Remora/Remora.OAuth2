@@ -122,15 +122,11 @@ public class RefreshAccessTokenTests
     /// Tests the <see cref="RefreshAccessTokenErrorResponse"/> class.
     /// </summary>
     public class RefreshAccessTokenErrorResponseTests :
-        JsonBackedTypeTestBase<RefreshAccessTokenErrorResponse>
-    {
-    }
+        JsonBackedTypeTestBase<RefreshAccessTokenErrorResponse>;
 
     /// <summary>
     /// Tests the <see cref="RefreshAccessTokenResponse"/> class.
     /// </summary>
     public class RefreshAccessTokenResponseTests :
-        JsonBackedTypeTestBase<RefreshAccessTokenResponse>
-    {
-    }
+        JsonBackedTypeTestBase<RefreshAccessTokenResponse>;
 }

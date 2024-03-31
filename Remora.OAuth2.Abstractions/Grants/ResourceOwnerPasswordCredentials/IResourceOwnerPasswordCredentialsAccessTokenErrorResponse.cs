@@ -29,6 +29,4 @@ namespace Remora.OAuth2.Abstractions;
 /// access token.
 /// </summary>
 [PublicAPI]
-public interface IResourceOwnerPasswordCredentialsAccessTokenErrorResponse : IAccessTokenErrorResponse
-{
-}
+public interface IResourceOwnerPasswordCredentialsAccessTokenErrorResponse : IAccessTokenErrorResponse;

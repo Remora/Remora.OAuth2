@@ -29,6 +29,4 @@ namespace Remora.OAuth2.Abstractions;
 /// response.
 /// </summary>
 [PublicAPI]
-public interface IAuthorizationCodeAuthorizationResponse : IAuthorizationResponse
-{
-}
+public interface IAuthorizationCodeAuthorizationResponse : IAuthorizationResponse;

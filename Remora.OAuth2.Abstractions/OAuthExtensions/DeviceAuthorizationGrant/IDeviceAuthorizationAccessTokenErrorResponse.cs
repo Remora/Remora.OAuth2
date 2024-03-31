@@ -28,6 +28,4 @@ namespace Remora.OAuth2.Abstractions.OAuthExtensions.DeviceAuthorizationGrant;
 /// Represents a failure to perform some remote operation when requesting a token.
 /// </summary>
 [PublicAPI]
-public interface IDeviceAuthorizationAccessTokenErrorResponse : IAccessTokenErrorResponse
-{
-}
+public interface IDeviceAuthorizationAccessTokenErrorResponse : IAccessTokenErrorResponse;

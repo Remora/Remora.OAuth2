@@ -26,6 +26,4 @@ namespace Remora.OAuth2.Abstractions;
 
 /// <inheritdoc />
 [PublicAPI]
-public interface IAuthorizationCodeAuthorizationErrorResponse : IAuthorizationErrorResponse
-{
-}
+public interface IAuthorizationCodeAuthorizationErrorResponse : IAuthorizationErrorResponse;

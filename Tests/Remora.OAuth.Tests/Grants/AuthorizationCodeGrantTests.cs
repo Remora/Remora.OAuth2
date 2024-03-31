@@ -504,15 +504,11 @@ public static class AuthorizationCodeGrantTests
     /// Tests the <see cref="AuthorizationCodeAccessTokenErrorResponse"/> class.
     /// </summary>
     public class AuthorizationCodeAccessTokenErrorResponseTests :
-        JsonBackedTypeTestBase<AuthorizationCodeAccessTokenErrorResponse>
-    {
-    }
+        JsonBackedTypeTestBase<AuthorizationCodeAccessTokenErrorResponse>;
 
     /// <summary>
     /// Tests the <see cref="AuthorizationCodeAccessTokenResponse"/> class.
     /// </summary>
     public class AuthorizationCodeAccessTokenResponseTests :
-        JsonBackedTypeTestBase<AuthorizationCodeAccessTokenResponse>
-    {
-    }
+        JsonBackedTypeTestBase<AuthorizationCodeAccessTokenResponse>;
 }

@@ -33,9 +33,7 @@ namespace Remora.OAuth2.Abstractions.OAuthExtensions;
 /// flow.
 /// </summary>
 [PublicAPI]
-public interface IRequestExtension
-{
-}
+public interface IRequestExtension;
 
 /// <summary>
 /// Marks a type as being an authorization request extension.

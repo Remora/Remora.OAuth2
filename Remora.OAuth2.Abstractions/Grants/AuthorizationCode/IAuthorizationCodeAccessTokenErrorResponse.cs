@@ -29,6 +29,4 @@ namespace Remora.OAuth2.Abstractions;
 /// access token.
 /// </summary>
 [PublicAPI]
-public interface IAuthorizationCodeAccessTokenErrorResponse : IAccessTokenErrorResponse
-{
-}
+public interface IAuthorizationCodeAccessTokenErrorResponse : IAccessTokenErrorResponse;
