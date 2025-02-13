@@ -67,7 +67,7 @@ public abstract class JsonBackedTypeTestBase<TType>
     /// <summary>
     /// Gets the data sample source.
     /// </summary>
-    public static TheoryData SampleSource => new SampleDataSource<TType>();
+    public static TheoryData<SampleDataDescriptor> SampleSource => new SampleDataSource<TType>();
 
     /// <summary>
     /// Gets the configured JSON serializer options.
